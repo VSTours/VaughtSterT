@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqs = [
+  {
+    q: "How do bookings work?",
+    a: "Contact me via the form, email, or WhatsApp with your dates and interests. We'll have a quick chat to discuss your preferences, and I'll create a custom itinerary. Once you're happy, I'll send a booking confirmation and payment details."
+  },
+  {
+    q: "What's included in the price?",
+    a: "All packages include premium transport, my personal guide services, entrance fees to venues, and professional photography. Food and accommodation can be included or arranged separately based on your preferences."
+  },
+  {
+    q: "Can I customize the experiences?",
+    a: "Absolutely! Every tour is bespoke. The packages are starting points—we'll tailor everything to your interests, pace, and style."
+  },
+  {
+    q: "How far in advance should I book?",
+    a: "I recommend 2-4 weeks for the best availability, especially during peak season (November-March). However, I've accommodated last-minute bookings when possible."
+  },
+  {
+    q: "Do you accommodate dietary restrictions?",
+    a: "Yes! Just let me know any dietary requirements, allergies, or preferences. South Africa has excellent options for all dietary needs."
+  },
+  {
+    q: "What about safety and insurance?",
+    a: "Your safety is my top priority. I'm fully insured, use reputable transport services, and know Cape Town intimately. I'll keep you informed about any safety considerations."
+  },
+  {
+    q: "Can you help with accommodation?",
+    a: "Yes! I can recommend and arrange everything from luxury hotels to boutique guesthouses, based on your budget and preferences."
+  },
+  {
+    q: "What if the weather doesn't cooperate?",
+    a: "Cape Town weather can be unpredictable. I always have backup plans, and we'll adjust the itinerary as needed. Some of my best tours happened on 'off' weather days!"
+  },
+  {
+    q: "Do you offer multi-day packages?",
+    a: "Yes! Multi-day experiences are my favorite. We can explore beyond Cape Town—Garden Route, safari, coastal towns, whatever interests you."
+  },
+  {
+    q: "What's your cancellation policy?",
+    a: "Full refund if cancelled 7+ days before. 50% refund for 3-7 days notice. Within 3 days, we can reschedule if possible. Life happens—I'm flexible."
+  },
+  {
+    q: "How many people per tour?",
+    a: "I specialize in intimate experiences: 1-4 guests is ideal. For larger groups, we can discuss options."
+  },
+  {
+    q: "Do you speak other languages?",
+    a: "I speak English fluently and some Afrikaans. For other languages, I can arrange professional translation services."
+  }
+];
+---
+
+<Layout 
+  title="FAQ" 
+  description="Common questions about booking tours with Vaughn Sterling. Everything you need to know about experiences, pricing, and logistics."
+>
+  <section class="py-20 bg-gradient-to-b from-white to-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="font-serif text-5xl md:text-6xl font-black text-navy mb-6">
+          Frequently Asked <span class="text-gold">Questions</span>
+        </h1>
+        <p class="text-xl text-gray-600">
+          Everything you need to know about touring with me
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        {faqs.map((faq, idx) => (
+          <div class="bg-white rounded-xl shadow-lg border-2 border-gray-100 overflow-hidden hover:border-gold transition-all">
+            <button 
+              class="faq-button w-full text-left p-6 flex items-center justify-between gap-4"
+              data-index={idx}
+            >
+              <span class="font-bold text-lg text-navy pr-4">{faq.q}</span>
+              <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-6">
+              <p class="text-gray-700 leading-relaxed">{faq.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Still Have Questions -->
+      <div class="mt-16 bg-gradient-to-br from-navy to-sa-blue p-8 md:p-12 rounded-2xl text-center text-white">
+        <h2 class="text-3xl font-bold mb-4">Still Have Questions?</h2>
+        <p class="text-xl text-gray-200 mb-8">
+          I'm here to help. Let's chat about your perfect South African experience.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="px-8 py-4 bg-gold text-navy font-bold rounded-lg hover:shadow-2xl transition-all">
+            Send a Message
+          </a>
+          <a href="https://wa.me/639202468178" target="_blank" class="px-8 py-4 bg-white/10 backdrop-blur border-2 border-white/30 text-white font-bold rounded-lg hover:bg-white/20 transition-all">
+            WhatsApp Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('.faq-icon');
+        const isOpen = !answer.classList.contains('hidden');
+        
+        // Close all
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+        
+        // Open clicked if was closed
+        if (!isOpen) {
+          answer.classList.remove('hidden');
+          icon.classList.add('rotate-180');
+        }
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,280 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Home">
+  <!-- Hero Section -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1920&q=80" 
+        alt="Cape Town and Table Mountain"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+      <h1 class="font-serif text-5xl md:text-7xl font-black mb-6 leading-tight">
+        Experience <span class="text-gold">South Africa</span><br/>
+        Like a Local
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+        Bespoke private tours of Cape Town, Wine Country, and beyond. 
+        Curated by someone who knows every hidden gem.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/services" class="px-8 py-4 bg-gradient-to-r from-gold to-sa-gold text-navy font-bold rounded-lg hover:shadow-2xl transition-all transform hover:scale-105">
+          View Experiences
+        </a>
+        <a href="/contact" class="px-8 py-4 bg-white/10 backdrop-blur border-2 border-white/30 text-white font-bold rounded-lg hover:bg-white/20 transition-all">
+          Book a Consultation
+        </a>
+      </div>
+      
+      <!-- Trust Indicators */}
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-300">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>Private & Personal</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+          <span>Fully Insured</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+          </svg>
+          <span>5-Star Rated</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Why Choose Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-serif text-4xl md:text-5xl font-black mb-4">
+          Why Choose <span class="text-navy">Vaughn Sterling Tours</span>
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          This isn't just another tour company. This is South Africa through the eyes of someone who lives it.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        {[
+          {
+            icon: '🗝️',
+            title: 'Insider Access',
+            desc: 'Restaurants locals actually eat at. Wine farms tourists never find. Sunset spots that take your breath away.'
+          },
+          {
+            icon: '👤',
+            title: 'Personal Touch',
+            desc: 'No buses. No crowds. Just you and me exploring South Africa at your pace, tailored to your interests.'
+          },
+          {
+            icon: '🤫',
+            title: 'Discretion Guaranteed',
+            desc: 'Privacy matters. Your experience stays between us. Professional, discreet, and trustworthy.'
+          },
+          {
+            icon: '🏆',
+            title: 'Luxury Standard',
+            desc: 'First-class accommodations, fine dining, premium experiences. You deserve the best.'
+          },
+          {
+            icon: '📸',
+            title: 'Memories Captured',
+            desc: 'Professional photography included. Take home stunning images of your journey.'
+          },
+          {
+            icon: '💬',
+            title: 'Cultural Bridge',
+            desc: 'Learn the real stories. Understand the culture. Go beyond the guidebook.'
+          }
+        ].map(benefit => (
+          <div class="p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 hover:border-gold hover:shadow-xl transition-all group">
+            <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">{benefit.icon}</div>
+            <h3 class="text-xl font-bold text-navy mb-3">{benefit.title}</h3>
+            <p class="text-gray-600 leading-relaxed">{benefit.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Experiences -->
+  <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-serif text-4xl md:text-5xl font-black mb-4">
+          Featured <span class="text-navy">Experiences</span>
+        </h2>
+        <p class="text-xl text-gray-600">
+          Each journey is bespoke, but here's where we typically start
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          {
+            title: 'Cape Town Essentials',
+            price: 'R8,000/day',
+            image: 'https://images.unsplash.com/photo-1576485375217-d6a95e34d043?w=600',
+            features: ['Table Mountain', 'V&A Waterfront', 'Camps Bay', 'Fine Dining']
+          },
+          {
+            title: 'Winelands Experience',
+            price: 'R12,000/day',
+            image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600',
+            features: ['Private Estates', 'Gourmet Lunch', 'Franschhoek', 'Sommelier Guide']
+          },
+          {
+            title: 'Garden Route',
+            price: 'R15,000/day',
+            image: 'https://images.unsplash.com/photo-1484318571209-661cf29a69c3?w=600',
+            features: ['Coastal Drives', 'Wildlife', 'Adventure', 'Multi-day Options']
+          },
+          {
+            title: 'Executive Package',
+            price: 'R20,000/3 days',
+            image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600',
+            features: ['Full Concierge', 'Luxury Stays', 'Business Support', 'Discretion']
+          }
+        ].map(exp => (
+          <a href="/services" class="group block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img 
+                src={exp.image} 
+                alt={exp.title}
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-navy mb-2 group-hover:text-gold transition-colors">
+                {exp.title}
+              </h3>
+              <div class="text-2xl font-black text-gold mb-4">
+                {exp.price}
+              </div>
+              <ul class="space-y-2">
+                {exp.features.map(feature => (
+                  <li class="flex items-center gap-2 text-sm text-gray-600">
+                    <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="/services" class="inline-block px-8 py-4 bg-gradient-to-r from-gold to-sa-gold text-navy font-bold rounded-lg hover:shadow-2xl transition-all">
+          View All Experiences
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 bg-navy text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-serif text-4xl md:text-5xl font-black mb-4">
+          What Guests Say
+        </h2>
+        <p class="text-xl text-gray-300">
+          Real experiences from real travelers
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        {[
+          {
+            quote: "Vaughn showed us a Cape Town we never would have discovered on our own. From hidden wine estates to sunset spots that took our breath away. This was the highlight of our South Africa trip.",
+            author: "Michael R.",
+            location: "London, UK",
+            rating: 5
+          },
+          {
+            quote: "Professional, knowledgeable, and incredibly discreet. Vaughn made our business trip memorable while maintaining the perfect balance of privacy and hospitality.",
+            author: "Sarah K.",
+            location: "New York, USA",
+            rating: 5
+          }
+        ].map(testimonial => (
+          <div class="p-8 bg-white/10 backdrop-blur rounded-2xl border border-white/20">
+            <div class="flex gap-1 mb-4">
+              {[...Array(testimonial.rating)].map(() => (
+                <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+              ))}
+            </div>
+            <p class="text-lg text-gray-200 italic mb-4">"{testimonial.quote}"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-gold to-sa-gold rounded-full flex items-center justify-center font-bold text-navy">
+                {testimonial.author.charAt(0)}
+              </div>
+              <div>
+                <div class="font-semibold">{testimonial.author}</div>
+                <div class="text-sm text-gray-400">{testimonial.location}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-br from-gold to-sa-gold">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-serif text-4xl md:text-5xl font-black text-navy mb-6">
+        Ready for an Unforgettable Journey?
+      </h2>
+      <p class="text-xl text-navy/80 mb-8">
+        Let's create a bespoke South African experience tailored perfectly to you.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="px-8 py-4 bg-navy text-white font-bold rounded-lg hover:bg-navy/90 transition-all transform hover:scale-105 shadow-lg">
+          Book Your Experience
+        </a>
+        <a href="https://wa.me/639202468178?text=Hi%20Vaughn,%20I'd%20like%20to%20learn%20more%20about%20your%20tours" target="_blank" class="px-8 py-4 bg-white text-navy font-bold rounded-lg hover:bg-gray-100 transition-all flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+          </svg>
+          WhatsApp Me
+        </a>
+      </div>
+      
+      <p class="text-sm text-navy/70 mt-6">
+        📍 Based in Cape Town • Response within 24 hours • 🇿🇦 Proudly South African
+      </p>
+    </div>
+  </section>
+</Layout>

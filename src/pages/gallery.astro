@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const galleries = [
+  {
+    category: 'Cape Town',
+    images: [
+      'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800',
+      'https://images.unsplash.com/photo-1591802820066-c7a973da0609?w=800',
+      'https://images.unsplash.com/photo-1523521904806-4324104fea1a?w=800',
+      'https://images.unsplash.com/photo-1576485375217-d6a95e34d043?w=800',
+    ]
+  },
+  {
+    category: 'Wine Country',
+    images: [
+      'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800',
+      'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800',
+      'https://images.unsplash.com/photo-1547593950-4ee0c65cf1a6?w=800',
+      'https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?w=800',
+    ]
+  },
+  {
+    category: 'Experiences',
+    images: [
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800',
+      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800',
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800',
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+    ]
+  }
+];
+---
+
+<Layout 
+  title="Gallery" 
+  description="See South Africa through the lens. Real moments from real tours with Vaughn Sterling Tours."
+>
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="font-serif text-5xl md:text-6xl font-black text-navy mb-6">
+          <span class="text-gold">Gallery</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          These are the moments we create together. Real experiences from real tours.
+        </p>
+      </div>
+
+      {galleries.map(gallery => (
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold text-navy mb-8 border-l-4 border-gold pl-4">
+            {gallery.category}
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {gallery.images.map((image, idx) => (
+              <div class="aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer group">
+                <img 
+                  src={image}
+                  alt={`${gallery.category} experience ${idx + 1}`}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- Instagram CTA -->
+      <div class="mt-16 text-center bg-gradient-to-r from-purple-600 to-pink-600 p-12 rounded-2xl text-white">
+        <h3 class="text-3xl font-bold mb-4">Follow the Journey</h3>
+        <p class="text-lg mb-6 text-white/90">
+          See daily updates, behind-the-scenes, and more stunning South African moments
+        </p>
+        <a 
+          href="https://instagram.com/vaughnsterlingtours" 
+          target="_blank"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-600 font-bold rounded-lg hover:shadow-2xl transition-all"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"></path>
+          </svg>
+          @vaughnsterlingtours
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

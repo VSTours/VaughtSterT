@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  height: 100%;
+}
+
+/* Custom CSS (colors are from Tailwind theme) */
+.bg-navy { background-color: theme('colors.navy'); }
+.text-navy { color: theme('colors.navy'); }
+
+/* Small helpers */
+.btn-primary { @apply px-6 py-3 rounded-lg font-bold; }
