@@ -5,7 +5,7 @@ const packages = [
   {
     id: 'cape-town',
     name: 'Cape Town Essentials',
-    price: 'R8,000',
+    price: 'R14,000',
     duration: 'Full Day',
     image: '/cape-town-1.jpg',
     description: 'Experience the Mother City\'s most iconic locations with insider access and local knowledge.',
@@ -24,7 +24,7 @@ const packages = [
   {
     id: 'winelands',
     name: 'Winelands Experience',
-    price: 'R12,000',
+    price: 'R16,000',
     duration: 'Full Day',
     image: '/winecountry-1.jpg',
     description: 'Discover South Africa\'s world-class wine country with exclusive estate access and gourmet experiences.',
@@ -43,8 +43,8 @@ const packages = [
   {
     id: 'garden-route',
     name: 'Garden Route Adventure',
-    price: 'R15,000',
-    duration: 'Full Day (Multi-day available)',
+    price: 'R19,000 (single day) or R14,000 per day',
+    duration: 'Single day / Multi-day',
     image: '/gardenroute-1.jpg',
     description: 'Explore South Africa\'s stunning coastline with wilderness activities and luxury accommodation.',
     included: [
@@ -62,7 +62,7 @@ const packages = [
   {
     id: 'executive',
     name: 'Executive Companion Package',
-    price: 'R20,000',
+    price: 'R40,000',
     duration: '3 Days',
     image: '/executive-1.jpg',
     description: 'Comprehensive concierge service with professional companionship for business or leisure.',
@@ -186,11 +186,11 @@ const packages = [
       <div class="grid md:grid-cols-2 gap-6">
         {[
           { name: 'Hot Air Balloon Ride', price: 'R3,000', desc: 'Sunrise flight over wine country' },
-          { name: 'Professional Photoshoot', price: 'R2,500', desc: '2-hour session, edited photos' },
-          { name: 'Helicopter Tour', price: 'R5,000', desc: '20-minute aerial Cape Town tour' },
-          { name: 'Private Chef Dinner', price: 'R4,000', desc: 'In-villa 5-course meal' },
-          { name: 'Spa Day', price: 'R3,500', desc: 'Full-day luxury spa experience' },
-          { name: 'Shark Cage Diving', price: 'R2,800', desc: 'Great white shark experience' }
+            { name: 'Professional Photoshoot', price: 'R2,500', desc: '2-hour session, edited photos' },
+            { name: 'Helicopter Tour', price: 'R5,000', desc: '20-minute aerial Cape Town tour' },
+            { name: 'Private Chef Dinner', price: 'R4,000', desc: 'In-villa 5-course meal' },
+            { name: 'Spa Day', price: 'R3,800', desc: 'Full-day luxury spa experience' },
+            { name: 'Shark Cage Diving', price: 'R3,200', desc: 'Great white shark experience' }
         ].map(addon => (
           <div class="p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-gold transition-all">
             <div class="flex items-center justify-between mb-2">
