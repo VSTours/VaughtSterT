@@ -16,7 +16,7 @@ jobs:
       CLOUDFLARE_PAGES_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
       CONTACT_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
     concurrency:
-      group: pages-deploy-${{ github.ref }}
+      group: "pages-deploy-${{ github.ref }}"
       cancel-in-progress: true
     steps:
       - name: Checkout repository
@@ -40,10 +40,9 @@ jobs:
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ env.CLOUDFLARE_PAGES_PROJECT_NAME }}
           directory: ./dist
-          commitMessage: "Auto-deploy: GitHub Actions build ${{ github.sha }}"
 
       - name: Wait and smoke test custom domain
-        if: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME != '' }}
+        if: ${{ env.CLOUDFLARE_PAGES_PROJECT_NAME != '' }}
         run: |
           echo "Waiting for DNS propagation & deployment..."
           sleep 5
