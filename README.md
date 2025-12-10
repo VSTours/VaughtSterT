@@ -29,9 +29,15 @@ npm run preview
 ```
 
 ## Deploy
-This project includes `wrangler.toml` and is configured for Cloudflare Pages as a static site (no adapter).
+This project is ready for Cloudflare Pages as a static site (no server adapter required).
 
-Example deploy workflow:
+The repo includes a GitHub Action to build and deploy automatically on push to `main` to Cloudflare Pages using the `cloudflare/pages-action` GitHub Action. To enable this, add these repository secrets in GitHub:
+
+- `CLOUDFLARE_API_TOKEN` — a Pages/token with `Pages` & `Account` write permissions.
+- `CLOUDFLARE_ACCOUNT_ID` — your Cloudflare account ID.
+- `CLOUDFLARE_PAGES_PROJECT_NAME` — your Pages project name (optional — action can detect if omitted).
+
+Manual deploy example using `wrangler` (optional):
 
 ```bash
 wrangler login
