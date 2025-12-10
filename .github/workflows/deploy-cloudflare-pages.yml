@@ -14,6 +14,7 @@ jobs:
     env:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       CLOUDFLARE_PAGES_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CONTACT_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
     concurrency:
       group: "pages-deploy-${{ github.ref }}"
@@ -34,9 +35,10 @@ jobs:
         run: npm run build
 
       - name: Deploy to Cloudflare Pages
+        if: ${{ env.CLOUDFLARE_ACCOUNT_ID != '' && env.CLOUDFLARE_PAGES_PROJECT_NAME != '' && env.CLOUDFLARE_API_TOKEN != '' }}
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ env.CLOUDFLARE_PAGES_PROJECT_NAME }}
           directory: ./dist
