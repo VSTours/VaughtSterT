@@ -10,6 +10,10 @@ export async function onRequest(context) {
     }});
   }
 
+  // Accept GET as a harmless probe (some clients prefetch or probe endpoints).
+  if (request.method === 'GET') {
+    return new Response(JSON.stringify({ ok: false, message: 'Contact API accepts POST requests only. Use POST to submit a contact inquiry.' }), { status: 200, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+  }
   if (request.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
   }
