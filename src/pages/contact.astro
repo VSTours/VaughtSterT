@@ -219,4 +219,36 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </section>
+  <script>
+    (function () {
+      const form = document.getElementById('booking-form');
+      if (!form) return;
+      const statusEl = document.createElement('div');
+      statusEl.className = 'mt-4 text-center text-sm';
+      form.appendChild(statusEl);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        statusEl.textContent = 'Sending...';
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (res.ok) {
+            statusEl.textContent = 'Thanks! Your inquiry was sent. I will respond within 24 hours.';
+            form.reset();
+          } else {
+            const txt = await res.text();
+            statusEl.textContent = 'Error: ' + (txt || res.statusText);
+          }
+        } catch (err) {
+          statusEl.textContent = 'Request failed. Please try again or contact via WhatsApp.';
+        }
+      });
+    })();
+  </script>
 </Layout>
