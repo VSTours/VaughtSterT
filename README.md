@@ -38,6 +38,19 @@ The repo includes a GitHub Action to build and deploy automatically on push to `
 - `CLOUDFLARE_PAGES_PROJECT_NAME` — your Pages project name (optional — action can detect if omitted).
 	- `CONTACT_WEBHOOK_URL` — optional webhook URL where contact/booking form submissions will be forwarded (e.g., Zapier, Slack inbound, SendGrid inbound webhook).
 
+Common Reasons a Custom Domain Might Not Load
+- DNS isn't pointed to the site: Make sure your domain's DNS is pointed to Cloudflare if you want Cloudflare Pages to serve it. If you're using Cloudflare, add the custom domain in Pages and ensure the site's DNS records are configured in the Cloudflare DNS dashboard.
+- SSL cert not issued yet: Cloudflare Pages will provision certificates once the domain is added and DNS is pointing to Cloudflare. This may take a few minutes.
+- Domain conflicts: If you previously used GitHub Pages or another hosting provider, remove conflicting DNS records (A/CNAME) that point to the old provider.
+
+Troubleshooting Steps
+1. Add your custom domain to the Pages project: Cloudflare Dashboard → Pages → Your project → Settings → Domains → Add a custom domain.
+2. Update DNS: If your domain is managed elsewhere, add the DNS records as instructed by Cloudflare. If you use Cloudflare-managed DNS, set the record to the value Cloudflare shows and ensure it is allowed / proxied as needed.
+3. Verify: After adding the domain and DNS records, the GitHub Actions workflow adds a smoke-check step that tries: `curl -sS -o /dev/null -w "%{http_code}" https://vaughnsterlingtours.com`. If it doesn't return 200, wait for DNS to propagate or check the Logs & Domain status in Cloudflare Pages dashboard.
+4. Remove conflicting hosting: If you use GitHub Pages or another host for the domain, remove the conflicting CNAME/A records.
+
+If you'd like help, share the current DNS settings for `vaughnsterlingtours.com` (masked if needed), and I can advise on the exact records required.
+
 Manual deploy example using `wrangler` (optional):
 
 ```bash

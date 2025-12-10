@@ -41,3 +41,18 @@ jobs:
           projectName: ${{ env.CLOUDFLARE_PAGES_PROJECT_NAME }}
           directory: ./dist
           commitMessage: "Auto-deploy: GitHub Actions build ${{ github.sha }}"
+
+      - name: Wait and smoke test custom domain
+        if: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME != '' }}
+        run: |
+          echo "Waiting for DNS propagation & deployment..."
+          sleep 5
+          domain='https://vaughnsterlingtours.com'
+          echo "Checking ${domain}..."
+          status=$(curl -sS -o /dev/null -w "%{http_code}" --retry 5 --retry-delay 5 --max-time 20 $domain || true)
+          echo "HTTP status: ${status}"
+          if [ "$status" != "200" ]; then
+            echo "Warning: ${domain} returned status ${status} — custom domain may not be configured correctly or DNS not propagated."
+            exit 0
+          fi
+          echo "Custom domain reachable: ${domain}"
