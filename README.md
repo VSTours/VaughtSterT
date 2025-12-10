@@ -36,7 +36,7 @@ The repo includes a GitHub Action to build and deploy automatically on push to `
 - `CLOUDFLARE_API_TOKEN` — a Pages/token with `Pages` & `Account` write permissions.
 - `CLOUDFLARE_ACCOUNT_ID` — your Cloudflare account ID.
 - `CLOUDFLARE_PAGES_PROJECT_NAME` — your Pages project name (optional — action can detect if omitted).
- - `CONTACT_WEBHOOK_URL` — optional webhook URL where contact/booking form submissions will be forwarded (e.g., Zapier, Slack inbound, SendGrid inbound webhook).
+	- `CONTACT_WEBHOOK_URL` — optional webhook URL where contact/booking form submissions will be forwarded (e.g., Zapier, Slack inbound, SendGrid inbound webhook).
 
 Manual deploy example using `wrangler` (optional):
 
@@ -50,7 +50,10 @@ wrangler pages deploy dist --project-name=vaughnsterlingtours
 - Verify the WhatsApp link is correct in `src/layouts/Layout.astro`, `src/pages/contact.astro`, and other pages. It's currently set to `https://wa.me/639202468178`.
 - Update the email address `vaughn@vaughnsterlingtours.com` to your working email address.
 - Replace Unsplash images with real photos if available.
- - Configure the Cloudflare Pages Environment Variable `CONTACT_WEBHOOK_URL` (or add it to the Pages project in the Cloudflare dashboard) to enable the `functions/contact` server-side forwarding.
+	- Configure the Cloudflare Pages Environment Variable `CONTACT_WEBHOOK_URL` (or add it to the Pages project in the Cloudflare dashboard) to enable the `functions/api/contact` server-side forwarding.
+
+### Cloudflare Pages Functions and environment variables
+To enable secure forwarding of contact requests from the `functions/api/contact` endpoint, set the `CONTACT_WEBHOOK_URL` value in the Pages project's Environment Variables (Cloudflare dashboard → Pages → Your project → Settings → Environment variables). The function reads `CONTACT_WEBHOOK_URL` from the environment and forwards POST data to that URL.
 
 ## Files Created
 - `package.json`
