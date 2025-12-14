@@ -268,19 +268,26 @@ const description = "Book your unforgettable tour experience with Vaughn Sterlin
                     }
                 };
 
-                // Your webhook URL
-                const webhookUrl = 'https://vaughn-sterling-booking-webhook.vaughn-ca8.workers.dev';
-
-                const response = await fetch(webhookUrl, {
+                // Submit booking to serverless endpoint which forwards to the configured webhook or SendGrid
+                const response = await fetch('/api/booking', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(payload)
                 });
 
                 if (!response.ok) {
-                    throw new Error('Failed to submit booking request');
+                    let errText = 'Failed to submit booking request';
+                    try {
+                        const json = await response.json();
+                        errText = json.error || json.message || JSON.stringify(json);
+                    } catch (e) {
+                        const txt = await response.text().catch(() => '');
+                        if (txt) errText = txt;
+                    }
+                    throw new Error(errText);
                 }
 
                 // Show success message

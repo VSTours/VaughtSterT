@@ -36,7 +36,15 @@ The repo includes a GitHub Action to build and deploy automatically on push to `
 - `CLOUDFLARE_API_TOKEN` — a Pages/token with `Pages` & `Account` write permissions.
 - `CLOUDFLARE_ACCOUNT_ID` — your Cloudflare account ID.
 - `CLOUDFLARE_PAGES_PROJECT_NAME` — your Pages project name (optional — action can detect if omitted).
-	- `CONTACT_WEBHOOK_URL` — optional webhook URL where contact/booking form submissions will be forwarded (e.g., Zapier, Slack inbound, SendGrid inbound webhook).
+	- `CONTACT_WEBHOOK_URL` — optional webhook URL where contact form submissions will be forwarded (e.g., Zapier, Slack inbound, SendGrid inbound webhook).
+	- `BOOKING_WEBHOOK_URL` — optional webhook URL the booking form will be forwarded to (if set). If not set, the server-side `functions/booking.js` can fall back to SendGrid to email booking requests to `SENDGRID_TO`.
+	- `BOOKING_SEND_COPY` — set to `true` to always send a SendGrid copy of booking requests in addition to forwarding to `BOOKING_WEBHOOK_URL`. When unset or false, the function will only send a copy if the webhook forwarding fails.
+
+Deployment steps for the Worker and site:
+- Add `BOOKING_WEBHOOK_URL` to Cloudflare Pages environment variables and set it to your Worker URL (e.g., `https://vaughn-sterling-booking-webhook.vaughn-ca8.workers.dev`).
+- If you want a site-side email backup, set `BOOKING_SEND_COPY=true` and configure `SENDGRID_API_KEY` and `SENDGRID_TO` (set to `vaughn@vaughnsterlingtours.com`).
+- Test end-to-end by submitting the booking form at `/booking` and verifying the Worker logs and email inbox.
+	- `SENDGRID_API_KEY`, `SENDGRID_FROM`, `SENDGRID_TO` — configure these if you prefer the site to send emails directly (SendGrid) when a webhook isn't configured.
 
 Common Reasons a Custom Domain Might Not Load
 - DNS isn't pointed to the site: Make sure your domain's DNS is pointed to Cloudflare if you want Cloudflare Pages to serve it. If you're using Cloudflare, add the custom domain in Pages and ensure the site's DNS records are configured in the Cloudflare DNS dashboard.
