@@ -290,7 +290,13 @@ const description = "Book your unforgettable tour experience with Vaughn Sterlin
                     throw new Error(errText);
                 }
 
-                // Show success message
+                const jsonResponse = await response.json().catch(() => ({}));
+                let deliveredVia = '';
+                if (jsonResponse.method) deliveredVia = ` via ${jsonResponse.method}`;
+                else if (jsonResponse.sendOk) deliveredVia = ' (email copy sent)';
+
+                const msgSpan = successMessage?.querySelector('span');
+                if (msgSpan) msgSpan.textContent = `Booking request submitted successfully${deliveredVia}! We'll contact you soon.`;
                 successMessage?.classList.remove('hidden');
 
                 // Reset form

@@ -11,7 +11,7 @@ export async function onRequest(context) {
   }
 
   if (request.method !== 'POST') {
-    return new Response('Method Not Allowed', { status: 405 });
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Allow': 'POST, OPTIONS' } });
   }
 
   let data = {};
@@ -146,5 +146,27 @@ export async function onRequest(context) {
     }
   }
 
-  return new Response(JSON.stringify({ error: 'No booking webhook or SendGrid configured' }), { status: 500, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+  // Final fallback: attempt to send using MailChannels (no API key required)
+  // Note: MailChannels accepts unauthenticated posts to /tx/v1/send for small-scale usage.
+  try {
+    const mailChannelsRes = await fetch('https://api.mailchannels.net/tx/v1/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: env.MAIL_TO || 'vaughn@vaughnsterlingtours.com' }] }],
+        from: { email: env.MAIL_FROM || 'noreply@vaughnsterlingtours.com', name: 'Vaughn Sterling Tours Booking System' },
+        subject: `New booking request: ${payload.tourType} on ${payload.date}`,
+        content: [{ type: 'text/plain', value: `Booking ID: (none)\nName: ${payload.name}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nTour: ${payload.tourType}\nDate: ${payload.date}\nGuests: ${payload.guests}\nSpecial Requests: ${payload.specialRequests}\nSource: ${payload.source}\n` }]
+      })
+    });
+
+    const mcBody = await mailChannelsRes.text().catch(() => '');
+    if (mailChannelsRes.ok) {
+      return new Response(JSON.stringify({ ok: true, method: 'mailchannels', sendInfo: { status: mailChannelsRes.status, body: mcBody } }), { status: 200, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+    }
+
+    return new Response(JSON.stringify({ error: 'MailChannels error', status: mailChannelsRes.status, body: mcBody }), { status: 502, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: 'No booking webhook, SendGrid, or MailChannels available', sendInfo: { error: String(err) } }), { status: 500, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+  }
 }
